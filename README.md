@@ -1,13 +1,39 @@
-## Fine-tuning InceptionV4 on Caltech101 Image Classification Dataset
+# Fine-tuning InceptionV4 on Caltech101 Image Classification Dataset
 
 This code fine-tunes an InceptionV4 model on the Caltech101 image classification dataset and exports the neural activity for visualization in Deephys.
 
-### Dependencies
+## Deephys and its Importance
+
+Deephys is a powerful tool for visualizing the inner workings of neural networks. It provides an intuitive way to explore the learned representations within the model's layers. By leveraging Deephys, we can obtain insights into the decision-making process of the model, which can greatly aid in the understanding, troubleshooting, and optimization of neural networks.
+
+This project particularly shows how to extract neural activity from a trained model and how to prepare it for visualization in Deephys. This involves capturing the model's output and the neural activity from specified layers during the forward pass.
+
+## Code Modularity and Adaptability
+
+The code shared here is designed to be adaptable for different models and datasets. It's broken down into distinct steps, each with its own function, making it easier to understand and modify as per the requirements of different models or datasets.
+
+1. **Data Loading and Preparation**: The process of loading and preparing data is independent of the specific dataset being used, so you can replace `load_data()` with a function to load your own dataset.
+
+2. **Model Training**: The model training function `train_model()` can be modified to fit different models and training configurations.
+
+3. **Extracting Neural Activity for Deephys**: This section uses PyTorch hooks to capture neural activity. The hook is registered to a specific layer in the model, and this can be adapted to any layer in any model.
+
+4. **Deephys Model Definition and Data Export**: The definition of the Deephys model and the export of the data to a Deephys-compatible format are generalized processes. You can easily adjust the `layers` parameter when defining the Deephys model to include the layers you are interested in.
+
+By maintaining modularity and generality in the code, we ensure that it can be adapted to different use cases with minimal changes, making it a robust and flexible starting point for various machine learning projects.
+
+## Dependencies
 
 This project relies on the following libraries:
 - torch
 - torchvision
 - deephys
+
+## Detailed Workflow and Code Description
+
+### Fine-tuning InceptionV4 on Caltech101 Image Classification Dataset
+
+This code fine-tunes an InceptionV4 model on the Caltech101 image classification dataset and exports the neural activity for visualization in Deephys.
 
 ### Data Loading and Preparation
 
@@ -108,4 +134,4 @@ dataset_activity.save('/content/drive/MyDrive/caltech101/Caltech101.test')
 
 ### Final Notes
 
-This project allows you to train a model on an image classification task and then visualize the neural activity of the model using Deephys.
+This project allows you to train a model on an image classification task and then visualize the neural activity of the model using Deephys. The specific layers of the model that are visualized can be easily adjusted by changing the `layers` parameter when defining the Deephys model. This project can serve as a template to adapt to your own datasets and models, promoting understanding and interpretability in machine learning.

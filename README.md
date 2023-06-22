@@ -135,3 +135,7 @@ dataset_activity.save('/content/drive/MyDrive/caltech101/Caltech101.test')
 ### Final Notes
 
 This project allows you to train a model on an image classification task and then visualize the neural activity of the model using Deephys. The specific layers of the model that are visualized can be easily adjusted by changing the `layers` parameter when defining the Deephys model. This project can serve as a template to adapt to your own datasets and models, promoting understanding and interpretability in machine learning.
+
+
+## License
+This work is licensed under CC BY-NC. See LICENSE for details.

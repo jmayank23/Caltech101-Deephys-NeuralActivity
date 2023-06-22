@@ -40,24 +40,8 @@ This code fine-tunes an InceptionV4 model on the Caltech101 image classification
 The Caltech101 dataset is loaded and split into training and testing datasets. The datasets are then loaded into PyTorch data loaders with a batch size of 64:
 
 ```python
-def enforce_rgb(x):
-    return x.convert('RGB')
-
-def load_data(test_split=0.2):
-    transform = torchvision.transforms.Compose([
-        torchvision.transforms.Lambda(enforce_rgb),
-        torchvision.transforms.Resize((299, 299)),
-        torchvision.transforms.ToTensor(),
-        torchvision.transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-    ])
-    dataset = torchvision.datasets.Caltech101(root="./data", download=True, transform=transform)
-    num_classes = len(dataset.categories)
-
-    num_samples = len(dataset)
-    test_size = int(num_samples * test_split)
-    train_size = num_samples - test_size
-    train_dataset, test_dataset = torch.utils.data.random_split(dataset, [train_size, test_size])
-
+def load_data():
+    ...
     return train_dataset, test_dataset, num_classes
   
 train_dataset, test_dataset, num_classes = load_data(test_split=0.2)
@@ -78,7 +62,8 @@ model = train_model(train_loader, test_loader, num_classes, num_epochs=num_epoch
 
 ### Extracting Neural Activity for Deephys
 
-A hook is registered with the model to extract the neural activity after the forward pass through the global pool layer. These activations are stored in the 'model_activity' dictionary, with the key as 'linear1':
+A hook is registered with the model to extract the neural activity from the penultimate layer. For Inception V4, it was after the forward pass through the global pool layer. Note, to figure out the penultimate layer, it is helpful to 'print(model)'\
+These activations are stored in the 'model_activity' dictionary, with the key as 'linear1':
 
 ```python
 model_activity = {}
@@ -100,11 +85,9 @@ def extract_activity(testloader, model):
 
 ### Deephys Model Definition and Data Export
 
-The Deephys model is defined with the layers that are to be visualized, and then saved:
+The Deephys model is defined with the layers that are to be visualized and then saved:
 
 ```python
-import deephys as dp
-
 dp_model = dp.model(
     name = "inception_v4",
     layers = {
@@ -132,7 +115,15 @@ dataset_activity = dp.dataset_activity(
 dataset_activity.save('/content/drive/MyDrive/caltech101/Caltech101.test')
 ```
 
-### Final Notes
+## Screenshots from the Deephys app
+1. **Visualization based on category:** Displays the most activated neuron for that class along with images it had the highest activations for, accuracy, false [positive, negative] along with the relevant image (need to scroll down in the app)
+<img width="1512" alt="247984813-1fae4604-08cf-49e6-8e34-66f588bcff5e" src="https://github.com/jmayank23/Caltech101_Deephys_NeuralActivity/assets/27727185/5bec5ca4-0b1e-498f-b609-d6ea7a8a6932">
+2. **Visualization for each image:** Shows the most activated neurons for that image along with other images that the neuron was also activated for. Also shows ground truth and predictions for that image by the model.
+<img width="1507" alt="Screen Shot 2023-06-21 at 9 53 05 PM" src="https://github.com/jmayank23/Caltech101_Deephys_NeuralActivity/assets/27727185/34f8d436-b9de-4a31-aeed-2ee7b59ee83f">
+3. **Visualization for each neuron:** Presents the images a given neuron was highly activated for (arranged in decreasing order of activation value.)
+<img width="1507" alt="Screen Shot 2023-06-21 at 9 52 36 PM" src="https://github.com/jmayank23/Caltech101_Deephys_NeuralActivity/assets/27727185/531eae08-3e6f-48b0-987f-44c8aa59087e">
+
+## Final Notes
 
 This project allows you to train a model on an image classification task and then visualize the neural activity of the model using Deephys. The specific layers of the model that are visualized can be easily adjusted by changing the `layers` parameter when defining the Deephys model. This project can serve as a template to adapt to your own datasets and models, promoting understanding and interpretability in machine learning.
 

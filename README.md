@@ -1,5 +1,7 @@
 # Fine-tuning InceptionV4 on Caltech101 Image Classification Dataset
 
+![ezgif com-gif-maker](https://github.com/jmayank23/Caltech101_Deephys_NeuralActivity/assets/27727185/85e410e6-1ac3-4c0f-ac45-57d2a6304b44)
+
 This code fine-tunes an InceptionV4 model on the Caltech101 image classification dataset and exports the neural activity for visualization in Deephys.
 
 ## Deephys and its Importance

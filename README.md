@@ -24,12 +24,6 @@ The code shared here is designed to be adaptable for different models and datase
 
 By maintaining modularity and generality in the code, we ensure that it can be adapted to different use cases with minimal changes, making it a robust and flexible starting point for various machine learning projects.
 
-## Dependencies
-
-This project relies on the following libraries:
-- torch
-- torchvision
-- deephys
 
 ## Detailed Workflow and Code Description
 

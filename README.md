@@ -111,7 +111,7 @@ dataset_activity = dp.dataset_activity(
 dataset_activity.save('/content/drive/MyDrive/caltech101/Caltech101.test')
 ```
 
-The final step is to download the Deephys app from the website and load the `.model` and `.test` files
+The final step is to download the [Deephys app](https://deephys.org/) and load the `.model` and `.test` files.
 
 ## Screenshots from the Deephys app
 1. **Visualization based on category:** Displays the most activated neuron for that class along with images it had the highest activations for, accuracy, false [positive, negative] along with the relevant image (need to scroll down in the app.)

@@ -59,8 +59,8 @@ model = train_model(train_loader, test_loader, num_classes, num_epochs=num_epoch
 ### Extracting Neural Activity for Deephys
 
 A hook is registered with the model to extract the neural activity from the penultimate layer. For Inception V4, it was after the forward pass through the global pool layer. \
-Note, to figure out the penultimate layer, it is helpful to 'print(model)'\
-These activations are stored in the 'model_activity' dictionary, with the key as 'linear1':
+Note, to figure out the penultimate layer, it is helpful to `print(model)`\
+These activations are stored in the 'model_activity' dictionary, with the key as `linear1`:
 
 ```python
 model_activity = {}

@@ -36,11 +36,11 @@ By maintaining modularity and generality in the code, we ensure that it can be a
 
 This code fine-tunes an InceptionV4 model on the Caltech101 image classification dataset and exports the neural activity for visualization in Deephys.
 
-<br/>
-
 ### Data Loading and Preparation
 
 The Caltech101 dataset is loaded and split into training and testing datasets. The datasets are then loaded into PyTorch data loaders with a batch size of 64:
+
+<br/>
 
 ```python
 def load_data():
